@@ -31,7 +31,7 @@ class ConvertViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         convertedLabel.text = currency.convert(amountString: usdTextField.text ?? "0")
     }
     
-    @IBAction func selectConversion(_ sender: Any) {
+    @IBAction func selectCurrency(_ sender: Any) {
         usdTextField.resignFirstResponder()
         currencyPicker.isHidden = false
         doneButton.isHidden = false
