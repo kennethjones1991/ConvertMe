@@ -12,15 +12,15 @@ enum Currency: Double, CaseIterable {
     case gbp = 0.72
     case usd = 1
     
-    private func convert(_ dollars: Double) -> Double {
-        dollars * self.rawValue
+    private func convert(_ amount: Double, from currency: Currency) -> Double {
+        (amount / currency.rawValue) * self.rawValue
     }
     
-    func convert(amountString: String) -> String? {
+    func convert(amountString: String, from currency: Currency) -> String? {
         guard let amount = Double(amountString) else {
-            return "0.00"
+            return ""
         }
         
-        return String(format: "%.2f", convert(amount))
+        return String(format: "%.2f", convert(amount, from: currency))
     }
 }

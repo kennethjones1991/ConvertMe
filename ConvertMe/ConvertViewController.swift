@@ -9,41 +9,72 @@ import UIKit
 
 class ConvertViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
-    @IBOutlet weak var usdTextField: UITextField!
-    @IBOutlet weak var convertedLabel: UILabel!
-    @IBOutlet weak var convertButton: UIButton!
-    @IBOutlet weak var doneButton: UIButton!
-    @IBOutlet weak var currencyPicker: UIPickerView!
+    @IBOutlet weak var leftTextField: UITextField!
+    @IBOutlet weak var rightTextField: UITextField!
+    @IBOutlet weak var rightConvertButton: UIButton!
+    @IBOutlet weak var leftConvertButton: UIButton!
+    @IBOutlet weak var rightDoneButton: UIButton!
+    @IBOutlet weak var leftDoneButton: UIButton!
+    @IBOutlet weak var rightCurrencyPicker: UIPickerView!
+    @IBOutlet weak var leftCurrencyPicker: UIPickerView!
     
-    var currency: Currency = .cad
-    let currencyStrings = ["CAD🇨🇦", "GBP🇬🇧", "USD🇺🇸"]
+    var rightCurrency: Currency = .cad
+    let rightCurrencyStrings = ["CAD🇨🇦", "GBP🇬🇧", "USD🇺🇸"]
+    
+    var leftCurrency: Currency = .usd
+    let leftCurrencyStrings = ["🇨🇦CAD", "🇬🇧GBP", "🇺🇸USD"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        doneButton.isHidden = true
-        currencyPicker.isHidden = true
+        rightDoneButton.isHidden = true
+        rightCurrencyPicker.isHidden = true
         
-        usdTextField.keyboardType = .decimalPad
+        leftDoneButton.isHidden = true
+        leftCurrencyPicker.isHidden = true
+        
+        leftTextField.keyboardType = .decimalPad
+        rightTextField.keyboardType = .decimalPad
     }
     
-    func updateViews() {
-        convertedLabel.text = currency.convert(amountString: usdTextField.text ?? "0")
+    func updateRightTextField() {
+        rightTextField.text = rightCurrency.convert(amountString: leftTextField.text ?? "", from: leftCurrency)
     }
     
-    @IBAction func selectCurrency(_ sender: Any) {
-        usdTextField.resignFirstResponder()
-        currencyPicker.isHidden = false
-        doneButton.isHidden = false
+    func updateLeftTextField() {
+        leftTextField.text = leftCurrency.convert(amountString: rightTextField.text ?? "", from: rightCurrency)
     }
     
-    @IBAction func finishSelectingCurrency(_ sender: Any) {
-        doneButton.isHidden = true
-        currencyPicker.isHidden = true
+    @IBAction func selectRightCurrency(_ sender: Any) {
+        leftTextField.resignFirstResponder()
+        rightTextField.resignFirstResponder()
+        rightCurrencyPicker.isHidden = false
+        rightDoneButton.isHidden = false
     }
     
-    @IBAction func updateValue(_ sender: Any) {
-        updateViews()
+    @IBAction func selectLeftCurrency(_ sender: Any) {
+        rightTextField.resignFirstResponder()
+        leftTextField.resignFirstResponder()
+        leftCurrencyPicker.isHidden = false
+        leftDoneButton.isHidden = false
+    }
+    
+    @IBAction func finishSelectingRightCurrency(_ sender: Any) {
+        rightDoneButton.isHidden = true
+        rightCurrencyPicker.isHidden = true
+    }
+    
+    @IBAction func finishSelectingLeftCurrency(_ sender: Any) {
+        leftDoneButton.isHidden = true
+        leftCurrencyPicker.isHidden = true
+    }
+    
+    @IBAction func updateLeftValue(_ sender: Any) {
+        updateRightTextField()
+    }
+    
+    @IBAction func updateRightValue(_ sender: Any) {
+        updateLeftTextField()
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -55,7 +86,11 @@ class ConvertViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        currencyStrings[row]
+        if pickerView == rightCurrencyPicker {
+            return rightCurrencyStrings[row]
+        } else {
+            return leftCurrencyStrings[row]
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -69,9 +104,15 @@ class ConvertViewController: UIViewController, UIPickerViewDataSource, UIPickerV
 //            currency = .cad
 //        }
         
-        currency = Currency.allCases[row]
-        convertButton.setTitle(currencyStrings[row], for: .normal)
-        updateViews()
+        if pickerView == rightCurrencyPicker {
+            rightCurrency = Currency.allCases[row]
+            rightConvertButton.setTitle(rightCurrencyStrings[row], for: .normal)
+            updateRightTextField()
+        } else {
+            leftCurrency = Currency.allCases[row]
+            leftConvertButton.setTitle(leftCurrencyStrings[row], for: .normal)
+            updateLeftTextField()
+        }
     }
 
 }

@@ -22,18 +22,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🇺🇸USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7LM-Pe-y6Q">
-                                <rect key="frame" x="20" y="135" width="58" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter $ Amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aBf-JC-sSN">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aBf-JC-sSN">
                                 <rect key="frame" x="20" y="164" width="142" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="updateValue:" destination="BYZ-38-t0r" eventType="editingChanged" id="pXP-i6-1Ls"/>
+                                    <action selector="updateLeftValue:" destination="BYZ-38-t0r" eventType="editingChanged" id="pXP-i6-1Ls"/>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EOs-6A-syn">
@@ -41,7 +35,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="CAD🇨🇦"/>
                                 <connections>
-                                    <action selector="selectCurrency:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PqA-gZ-VMa"/>
+                                    <action selector="selectRightCurrency:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PqA-gZ-VMa"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="equal" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Vf3-QR-Fay">
@@ -52,12 +46,6 @@
                                     <constraint firstAttribute="width" constant="50" id="oVz-vM-vfO"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dpg-3J-U5x">
-                                <rect key="frame" x="228" y="164" width="142" height="25.666666666666657"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QBM-7I-02J">
                                 <rect key="frame" x="0.0" y="213.66666666666663" width="390" height="216"/>
                                 <connections>
@@ -69,7 +57,37 @@
                                 <rect key="frame" x="333" y="213.66666666666666" width="37" height="30"/>
                                 <state key="normal" title="Done"/>
                                 <connections>
-                                    <action selector="finishSelectingCurrency:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UdZ-6o-Lmg"/>
+                                    <action selector="finishSelectingRightCurrency:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UdZ-6o-Lmg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7aY-7i-3wY">
+                                <rect key="frame" x="20" y="131" width="58" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="🇺🇸USD"/>
+                                <connections>
+                                    <action selector="selectLeftCurrency:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VV6-ea-Cbt"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Amount" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d0G-Gm-qRY">
+                                <rect key="frame" x="228" y="164" width="142" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="updateRightValue:" destination="BYZ-38-t0r" eventType="editingChanged" id="3Ex-aR-WuP"/>
+                                </connections>
+                            </textField>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ss-NS-EGR">
+                                <rect key="frame" x="0.0" y="214" width="390" height="216"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="ybP-Js-aTL"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="8ER-IR-vT1"/>
+                                </connections>
+                            </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kma-ph-awu">
+                                <rect key="frame" x="20" y="213.66666666666666" width="37" height="30"/>
+                                <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="finishSelectingLeftCurrency:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7LT-Ni-yTk"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -77,33 +95,41 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="QBM-7I-02J" firstAttribute="trailing" secondItem="R99-EL-hvc" secondAttribute="trailing" constant="20" id="10h-Qk-2d0"/>
+                            <constraint firstItem="0ss-NS-EGR" firstAttribute="top" secondItem="Vf3-QR-Fay" secondAttribute="bottom" constant="8" id="2B5-QR-zln"/>
                             <constraint firstItem="QBM-7I-02J" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="4NC-U6-MIl"/>
                             <constraint firstItem="Vf3-QR-Fay" firstAttribute="leading" secondItem="aBf-JC-sSN" secondAttribute="trailing" constant="8" id="96E-Yw-Hdy"/>
-                            <constraint firstItem="7LM-Pe-y6Q" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="9bf-rY-9ho"/>
+                            <constraint firstItem="d0G-Gm-qRY" firstAttribute="leading" secondItem="Vf3-QR-Fay" secondAttribute="trailing" constant="8" id="BLf-RG-ZZO"/>
                             <constraint firstItem="QBM-7I-02J" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="CCi-IC-c7t"/>
                             <constraint firstItem="fll-3U-Kg9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="D09-SS-Klx"/>
+                            <constraint firstItem="d0G-Gm-qRY" firstAttribute="top" secondItem="EOs-6A-syn" secondAttribute="bottom" id="EKZ-A1-UVf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fll-3U-Kg9" secondAttribute="trailing" constant="20" id="Enz-J7-laV"/>
+                            <constraint firstItem="7aY-7i-3wY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="FAQ-DS-GAf"/>
+                            <constraint firstItem="0ss-NS-EGR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="KXN-Pq-iTV"/>
                             <constraint firstItem="aBf-JC-sSN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Kbb-cU-3jd"/>
                             <constraint firstItem="Vf3-QR-Fay" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Mc1-ut-b1I"/>
+                            <constraint firstItem="7aY-7i-3wY" firstAttribute="top" secondItem="fll-3U-Kg9" secondAttribute="bottom" constant="46" id="Ng1-F2-FZa"/>
+                            <constraint firstItem="Kma-ph-awu" firstAttribute="leading" secondItem="0ss-NS-EGR" secondAttribute="leading" constant="20" id="P9B-Cu-LCF"/>
                             <constraint firstItem="Vf3-QR-Fay" firstAttribute="top" secondItem="fll-3U-Kg9" secondAttribute="bottom" constant="70.829999999999998" id="QsX-aN-33k"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Dpg-3J-U5x" secondAttribute="trailing" constant="20" id="RT5-EB-GEi"/>
-                            <constraint firstItem="aBf-JC-sSN" firstAttribute="top" secondItem="7LM-Pe-y6Q" secondAttribute="bottom" constant="8" id="Z7p-2f-dlx"/>
                             <constraint firstItem="EOs-6A-syn" firstAttribute="top" secondItem="fll-3U-Kg9" secondAttribute="bottom" constant="46" id="ZCE-Mm-HUR"/>
-                            <constraint firstItem="Dpg-3J-U5x" firstAttribute="leading" secondItem="Vf3-QR-Fay" secondAttribute="trailing" constant="8" id="cBt-l0-Q0Y"/>
-                            <constraint firstItem="Dpg-3J-U5x" firstAttribute="top" secondItem="EOs-6A-syn" secondAttribute="bottom" id="czl-Ai-CVc"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="d0G-Gm-qRY" secondAttribute="trailing" constant="20" id="b7M-Os-xsT"/>
                             <constraint firstItem="QBM-7I-02J" firstAttribute="top" secondItem="Vf3-QR-Fay" secondAttribute="bottom" constant="8" id="eec-tt-LmL"/>
+                            <constraint firstItem="0ss-NS-EGR" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="fSq-uO-C3e"/>
                             <constraint firstItem="fll-3U-Kg9" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="gVj-e3-nPK"/>
                             <constraint firstItem="R99-EL-hvc" firstAttribute="top" secondItem="QBM-7I-02J" secondAttribute="top" id="jHv-PH-9rR"/>
+                            <constraint firstItem="Kma-ph-awu" firstAttribute="top" secondItem="0ss-NS-EGR" secondAttribute="top" id="lTW-Ht-Smp"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="EOs-6A-syn" secondAttribute="trailing" constant="20" id="neD-ts-Mug"/>
-                            <constraint firstItem="7LM-Pe-y6Q" firstAttribute="top" secondItem="fll-3U-Kg9" secondAttribute="bottom" constant="50" id="xXl-cp-T3c"/>
+                            <constraint firstItem="aBf-JC-sSN" firstAttribute="top" secondItem="7aY-7i-3wY" secondAttribute="bottom" id="v6E-64-5aX"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="convertButton" destination="EOs-6A-syn" id="B4S-wM-zNB"/>
-                        <outlet property="convertedLabel" destination="Dpg-3J-U5x" id="S0C-v2-oIy"/>
-                        <outlet property="currencyPicker" destination="QBM-7I-02J" id="IjV-7f-cJd"/>
-                        <outlet property="doneButton" destination="R99-EL-hvc" id="5OI-A8-7lp"/>
-                        <outlet property="usdTextField" destination="aBf-JC-sSN" id="VrR-xb-BCh"/>
+                        <outlet property="leftConvertButton" destination="7aY-7i-3wY" id="Drt-nD-ShC"/>
+                        <outlet property="leftCurrencyPicker" destination="0ss-NS-EGR" id="BBN-Gp-LeM"/>
+                        <outlet property="leftDoneButton" destination="Kma-ph-awu" id="cHe-eb-e3C"/>
+                        <outlet property="leftTextField" destination="aBf-JC-sSN" id="VrR-xb-BCh"/>
+                        <outlet property="rightConvertButton" destination="EOs-6A-syn" id="B4S-wM-zNB"/>
+                        <outlet property="rightCurrencyPicker" destination="QBM-7I-02J" id="IjV-7f-cJd"/>
+                        <outlet property="rightDoneButton" destination="R99-EL-hvc" id="5OI-A8-7lp"/>
+                        <outlet property="rightTextField" destination="d0G-Gm-qRY" id="95Z-hy-1l7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
